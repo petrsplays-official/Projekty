@@ -4,15 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PetrsPlays Official — Projekty</title>
-  <meta property="og:title" content="PetrsPlays Official — Projekty" />
-  <meta property="og:description" content="Přehled všech projektů pod PetrsPlays Official." />
-  <meta property="og:type" content="website" />
   <style>
     :root {
       --bg: #0b0d12;
       --surface: #131722;
       --surface-hover: #1a2030;
-      --border: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.09);
       --text: #f1f5f9;
       --muted: #94a3b8;
       --accent: #3b82f6;
@@ -37,7 +34,6 @@
       flex-direction: column;
     }
 
-    /* Header */
     header {
       position: sticky;
       top: 0;
@@ -45,10 +41,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 20px;
-      background: rgba(11, 13, 18, 0.85);
+      padding: 12px 18px;
+      background: rgba(11, 13, 18, 0.88);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
 
@@ -57,7 +52,13 @@
       align-items: center;
       gap: 12px;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1.08rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .menu-btn {
@@ -79,11 +80,173 @@
       color: var(--text);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 0.9rem;
+      padding: 8px 10px;
+      font-size: 0.88rem;
       font-weight: 600;
       outline: none;
       cursor: pointer;
+    }
+
+    .login-trigger-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .avatar-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid rgba(59, 130, 246, 0.55);
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      overflow: hidden;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .avatar-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .close-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+    }
+
+    /* Popover & Modals */
+    .account-popover {
+      position: fixed;
+      top: 66px;
+      right: 16px;
+      width: calc(100vw - 32px);
+      max-width: 360px;
+      background: #121622;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      z-index: 60;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .account-popover.open {
+      display: flex;
+    }
+
+    .popover-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .popover-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #fff;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .popover-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .popover-name {
+      font-weight: 700;
+      font-size: 0.96rem;
+    }
+
+    .popover-email {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(4px);
+      z-index: 70;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 440px;
+      max-height: 88vh;
+      overflow-y: auto;
+      background: #121622;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-top h2 {
+      font-size: 1.2rem;
+    }
+
+    .detail-body {
+      color: var(--text);
+      font-size: 0.95rem;
+      white-space: pre-line;
+      line-height: 1.65;
     }
 
     /* Sidebar */
@@ -91,7 +254,6 @@
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(3px);
       z-index: 45;
       opacity: 0;
       pointer-events: none;
@@ -113,8 +275,6 @@
       border-right: 1px solid var(--border);
       z-index: 50;
       padding: 20px 16px;
-      display: flex;
-      flex-direction: column;
       transform: translateX(-100%);
       transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -133,15 +293,6 @@
       font-weight: 700;
     }
 
-    .close-btn {
-      background: transparent;
-      border: none;
-      color: var(--muted);
-      font-size: 1.4rem;
-      cursor: pointer;
-      padding: 4px 8px;
-    }
-
     .nav-list {
       list-style: none;
       display: flex;
@@ -150,15 +301,12 @@
     }
 
     .nav-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: block;
       padding: 11px 14px;
       border-radius: 10px;
       color: var(--muted);
       text-decoration: none;
       font-weight: 500;
-      transition: all 0.2s ease;
     }
 
     .nav-link:hover {
@@ -175,7 +323,7 @@
     /* Main */
     main {
       width: 100%;
-      max-width: 960px;
+      max-width: 940px;
       margin: 0 auto;
       padding: 28px 18px 48px;
       flex: 1;
@@ -188,104 +336,68 @@
       .menu-btn { display: none; }
       aside.sidebar { transform: translateX(0); }
       header, main, footer { margin-left: var(--sidebar-w); }
-      .close-btn { display: none; }
+      .sidebar-header .close-btn { display: none; }
     }
 
     .hero {
       background: linear-gradient(145deg, #141927, #0e121b);
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 26px 22px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
+      padding: 24px 22px;
     }
 
     .hero h1 {
-      font-size: 1.7rem;
+      font-size: 1.65rem;
       margin-bottom: 4px;
     }
 
     .hero p {
       color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .count-pill {
-      background: var(--accent-glow);
-      color: #60a5fa;
-      border: 1px solid rgba(59, 130, 246, 0.35);
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.94rem;
     }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 22px;
+      padding: 20px;
     }
 
-    .card h2 {
-      font-size: 1.15rem;
-      margin-bottom: 12px;
+    /* Složka / sekce Upravit viditelná POUZE pro petrsplays@gmail.com */
+    #admin-section {
+      display: none;
     }
 
-    /* Auth & Admin UI */
-    .auth-status {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 14px;
-      padding: 10px 12px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border);
-      border-radius: 10px;
+    #admin-section.visible {
+      display: block;
     }
 
-    .auth-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-
-    @media (min-width: 700px) {
-      .auth-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .auth-box {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
+    .field-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
+      margin-bottom: 10px;
     }
 
-    .auth-box h3 {
-      font-size: 0.95rem;
-      margin-bottom: 2px;
+    .field-group label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 600;
     }
 
-    input, textarea, select {
+    input, textarea {
       width: 100%;
-      background: #0d1018;
+      background: #0b0e16;
       color: var(--text);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 10px 12px;
-      font-size: 0.92rem;
+      padding: 9px 12px;
+      font-size: 0.9rem;
       font-family: inherit;
       outline: none;
     }
 
-    input:focus, textarea:focus, select:focus {
+    input:focus, textarea:focus {
       border-color: var(--accent);
     }
 
@@ -294,7 +406,7 @@
       resize: vertical;
     }
 
-    button {
+    .btn {
       background: var(--accent);
       color: #fff;
       border: none;
@@ -303,21 +415,20 @@
       font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
-      transition: opacity 0.2s ease;
     }
 
-    button:hover {
-      opacity: 0.9;
+    .btn-full {
+      width: 100%;
     }
 
-    button.secondary {
-      background: #1e2536;
+    .btn-secondary {
+      background: #1b2234;
       color: var(--text);
       border: 1px solid var(--border);
     }
 
-    button.danger {
-      background: rgba(239, 68, 68, 0.16);
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.15);
       color: #f87171;
       border: 1px solid rgba(239, 68, 68, 0.35);
     }
@@ -326,79 +437,58 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
-    #admin-panel {
-      display: none;
-    }
-
-    #admin-panel.visible {
-      display: block;
-    }
-
-    /* Projects Grid */
-    .projects-grid {
+    .items-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 14px;
     }
 
     @media (min-width: 680px) {
-      .projects-grid {
+      .items-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    .project-card {
+    .item-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 20px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 12px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
     }
 
-    .project-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 0.78rem;
-      color: var(--muted);
+    .item-card:hover {
+      background: var(--surface-hover);
+      border-color: rgba(59, 130, 246, 0.4);
     }
 
-    .tag {
-      background: rgba(59, 130, 246, 0.15);
-      color: #60a5fa;
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-weight: 600;
-    }
-
-    .project-title {
-      font-size: 1.15rem;
+    .item-title {
+      font-size: 1.1rem;
       font-weight: 700;
+      margin-bottom: 6px;
     }
 
-    .project-desc {
+    .item-preview {
       color: var(--muted);
-      font-size: 0.93rem;
-      white-space: pre-line;
-    }
-
-    .project-link {
-      display: inline-block;
-      color: #60a5fa;
-      text-decoration: none;
-      font-weight: 600;
       font-size: 0.9rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    .project-link:hover {
-      text-decoration: underline;
+    .save-msg {
+      font-size: 0.82rem;
+      color: #4ade80;
+      display: none;
     }
 
     footer {
@@ -421,10 +511,10 @@
     </div>
     <ul class="nav-list">
       <li><a class="nav-link" href="https://petrsplays-official.github.io/Home/" data-i18n="nav_home">Home</a></li>
-      <li><a class="nav-link active" href="https://petrsplays-official.github.io/Projekty/" data-i18n="nav_projects">Projekty</a></li>
+      <li><a class="nav-link" href="https://petrsplays-official.github.io/Projekty/" data-i18n="nav_projects">Projekty</a></li>
       <li><a class="nav-link" href="https://petrsplays-official.github.io/Team/" data-i18n="nav_team">Team</a></li>
       <li><a class="nav-link" href="https://petrsplays-official.github.io/work_with_us/" data-i18n="nav_work">Spolupráce</a></li>
-      <li><a class="nav-link" href="https://petrsplays-official.github.io/Blogs/" data-i18n="nav_blogs">Blog</a></li>
+      <li><a class="nav-link active" href="https://petrsplays-official.github.io/Blogs/" data-i18n="nav_blogs">Blog</a></li>
       <li><a class="nav-link" href="https://petrsplays-official.github.io/sponsors/" data-i18n="nav_sponsors">Sponzoři</a></li>
       <li><a class="nav-link" href="https://petrsplays-official.github.io/your_ads/" data-i18n="nav_ads">Vaše reklamy</a></li>
     </ul>
@@ -436,82 +526,114 @@
       <span>PetrsPlays Official</span>
     </div>
 
-    <select class="lang-select" id="langSelect" aria-label="Language">
-      <option value="cs">CS</option>
-      <option value="sk">SK</option>
-      <option value="en-GB">EN-GB</option>
-      <option value="en-US">EN-US</option>
-      <option value="uk">UA</option>
-    </select>
+    <div class="header-actions">
+      <select class="lang-select" id="langSelect" aria-label="Language">
+        <option value="cs">CS</option>
+        <option value="sk">SK</option>
+        <option value="en-GB">EN-GB</option>
+        <option value="en-US">EN-US</option>
+        <option value="uk">UA</option>
+      </select>
+
+      <button class="login-trigger-btn" id="openLoginModal" data-i18n="btn_login">Přihlásit se</button>
+      <button class="avatar-btn" id="avatarBtn" aria-label="Můj účet">U</button>
+    </div>
   </header>
+
+  <!-- Rozbalovací profil (stejné jako v Home) -->
+  <div class="account-popover" id="accountPopover">
+    <div class="popover-header">
+      <div class="popover-avatar" id="popoverAvatar">U</div>
+      <div style="flex:1;min-width:0;">
+        <div class="popover-name" id="popoverDisplayName">Uživatel</div>
+        <div class="popover-email" id="popoverEmail"></div>
+      </div>
+      <button class="close-btn" id="closePopover" aria-label="Zavřít">&times;</button>
+    </div>
+
+    <div class="field-group">
+      <label for="prof-name">Přezdívka / Jméno</label>
+      <input type="text" id="prof-name" />
+    </div>
+    <div class="field-group">
+      <label for="prof-discord">Discord nick</label>
+      <input type="text" id="prof-discord" />
+    </div>
+    <div class="field-group">
+      <label for="prof-roblox">Roblox nick</label>
+      <input type="text" id="prof-roblox" />
+    </div>
+    <div class="field-group">
+      <label for="prof-bio">O mně</label>
+      <textarea id="prof-bio"></textarea>
+    </div>
+
+    <button class="btn btn-full" id="btnSaveProfile">Uložit profil</button>
+    <div class="save-msg" id="profileSaveMsg">Uloženo do Firestore.</div>
+    <button class="btn btn-full btn-danger" id="btnLogout">Odhlásit se</button>
+  </div>
+
+  <!-- Přihlašovací modal -->
+  <div class="modal-backdrop" id="loginModal">
+    <div class="modal-card">
+      <div class="modal-top">
+        <h2>Přihlášení k účtu</h2>
+        <button class="close-btn" id="closeLoginModal" aria-label="Zavřít">&times;</button>
+      </div>
+      <button class="btn btn-full" id="btnLoginGoogle">Pokračovat přes Google</button>
+      <input type="email" id="loginEmail" placeholder="E-mail" />
+      <input type="password" id="loginPassword" placeholder="Heslo" />
+      <button class="btn btn-full btn-secondary" id="btnLoginEmail">Přihlásit se e-mailem</button>
+    </div>
+  </div>
+
+  <!-- Detail položky (blog / projekt / atd.) s křížkem pro zavření -->
+  <div class="modal-backdrop" id="detailModal">
+    <div class="modal-card">
+      <div class="modal-top">
+        <h2 id="detailTitle"></h2>
+        <button class="close-btn" id="closeDetailModal" aria-label="Zavřít">&times;</button>
+      </div>
+      <p class="detail-body" id="detailBody"></p>
+      <a id="detailLink" href="#" target="_blank" rel="noopener noreferrer" style="display:none;color:#60a5fa;font-weight:600;text-decoration:none;">Otevřít odkaz &rarr;</a>
+    </div>
+  </div>
 
   <main>
     <section class="hero">
-      <div>
-        <h1 data-i18n="projects_title">Projekty</h1>
-        <p data-i18n="projects_sub">Přehled všech aktivních i archivních projektů ukládaných do Firestore.</p>
-      </div>
-      <span class="count-pill" id="project-count">0 projektů</span>
+      <h1 data-i18n="page_title">Sekce</h1>
+      <p data-i18n="page_sub">Kliknutím na položku otevřeš její detail a zavřeš ho křížkem.</p>
     </section>
 
-    <!-- Admin Panel: viditelný jen pro petrsplays@gmail.com -->
-    <section class="card" id="admin-panel">
-      <h2 id="form-heading" data-i18n="admin_add_title">Přidat / upravit projekt (pouze petrsplays@gmail.com)</h2>
-      <input type="hidden" id="edit-doc-id" />
+    <!-- Složka / sekce Upravit: vidí POUZE petrsplays@gmail.com -->
+    <section class="card" id="admin-section">
+      <h2 style="margin-bottom:12px;" data-i18n="edit_folder_title">Upravit / přidat položku</h2>
+      <input type="hidden" id="editDocId" />
 
-      <div class="btn-row" style="margin-bottom: 10px;">
-        <input type="text" id="proj-title" placeholder="Název projektu" />
-        <input type="text" id="proj-category" placeholder="Kategorie (např. Roblox, Web, MHD)" />
+      <div class="field-group">
+        <label for="itemTitle">Název</label>
+        <input type="text" id="itemTitle" placeholder="Název položky" />
       </div>
 
-      <input type="url" id="proj-url" placeholder="Odkaz na projekt (https://...)" style="margin-bottom: 10px;" />
-      <textarea id="proj-desc" placeholder="Popis projektu..."></textarea>
+      <div class="field-group">
+        <label for="itemUrl">Odkaz (volitelné)</label>
+        <input type="url" id="itemUrl" placeholder="https://..." />
+      </div>
+
+      <div class="field-group">
+        <label for="itemContent">Obsah / popis</label>
+        <textarea id="itemContent" placeholder="Text položky..."></textarea>
+      </div>
 
       <div class="btn-row">
-        <button id="btn-save-project" data-i18n="btn_save_project">Uložit projekt</button>
-        <button id="btn-cancel-edit" class="secondary" style="display: none;" data-i18n="btn_cancel">Zrušit úpravu</button>
+        <button class="btn" id="btnSaveItem">Uložit</button>
+        <button class="btn btn-secondary" id="btnCancelEdit" style="display:none;">Zrušit</button>
       </div>
     </section>
 
-    <!-- Seznam všech projektů -->
-    <section>
-      <div class="projects-grid" id="projects-container">
-        <div class="card"><p data-i18n="loading_projects">Načítám projekty...</p></div>
-      </div>
-    </section>
-
-    <!-- Přihlášení (E-mail, Google, Telefon) -->
-    <section class="card">
-      <h2 data-i18n="auth_title">Přihlášení</h2>
-      <div class="auth-status" id="auth-status">Nepřihlášen</div>
-
-      <div class="auth-grid">
-        <div class="auth-box">
-          <h3>E-mail &amp; Heslo</h3>
-          <input type="email" id="login-email" placeholder="petrsplays@gmail.com" />
-          <input type="password" id="login-password" placeholder="Heslo" />
-          <button id="btn-login-email">Přihlásit e-mailem</button>
-        </div>
-
-        <div class="auth-box">
-          <h3>Google</h3>
-          <p style="font-size: 0.85rem; color: var(--muted);">Přihlášení přes Google účet.</p>
-          <button id="btn-login-google">Přihlásit přes Google</button>
-        </div>
-
-        <div class="auth-box">
-          <h3>Telefon (SMS)</h3>
-          <input type="tel" id="login-phone" placeholder="+420123456789" />
-          <button id="btn-send-sms">Poslat SMS kód</button>
-          <div id="recaptcha-container"></div>
-          <input type="text" id="sms-code" placeholder="Kód z SMS" />
-          <button id="btn-verify-sms">Ověřit SMS kód</button>
-        </div>
-      </div>
-
-      <div class="btn-row" style="margin-top: 12px;">
-        <button id="btn-logout" class="secondary">Odhlásit se</button>
-      </div>
+    <!-- Seznam položek -->
+    <section class="items-grid" id="itemsGrid">
+      <div class="card"><p>Načítám...</p></div>
     </section>
   </main>
 
@@ -528,15 +650,16 @@
       signInWithEmailAndPassword,
       GoogleAuthProvider,
       signInWithPopup,
-      RecaptchaVerifier,
-      signInWithPhoneNumber,
+      updateProfile,
       signOut
     } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
     import {
       getFirestore,
       collection,
-      addDoc,
       doc,
+      getDoc,
+      setDoc,
+      addDoc,
       updateDoc,
       deleteDoc,
       onSnapshot,
@@ -555,14 +678,14 @@
       measurementId: "G-BRG1B0CJK0"
     };
 
+    // Pro každý repozitář změň na: "blogs", "projects", "team", "work_with_us", "sponsors", "ads"
+    const COLLECTION_NAME = "blogs";
+    const ADMIN_EMAIL = "petrsplays@gmail.com";
+
     const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+    getAnalytics(app);
     const auth = getAuth(app);
     const db = getFirestore(app);
-
-    const ADMIN_EMAIL = "petrsplays@gmail.com";
-    let confirmationResult = null;
-    let currentProjectsMap = new Map();
 
     // Sidebar
     const sidebar = document.getElementById("sidebar");
@@ -578,288 +701,227 @@
     document.getElementById("closeSidebar").addEventListener("click", closeSide);
     overlay.addEventListener("click", closeSide);
 
-    // Admin kontrola
+    // Přihlášení & Profil (stejná logika jako v Home)
+    const openLoginModalBtn = document.getElementById("openLoginModal");
+    const loginModal = document.getElementById("loginModal");
+    const avatarBtn = document.getElementById("avatarBtn");
+    const accountPopover = document.getElementById("accountPopover");
+    const adminSection = document.getElementById("admin-section");
+
+    openLoginModalBtn.addEventListener("click", () => loginModal.classList.add("open"));
+    document.getElementById("closeLoginModal").addEventListener("click", () => loginModal.classList.remove("open"));
+    loginModal.addEventListener("click", (e) => { if (e.target === loginModal) loginModal.classList.remove("open"); });
+
+    avatarBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      accountPopover.classList.toggle("open");
+    });
+    document.getElementById("closePopover").addEventListener("click", () => accountPopover.classList.remove("open"));
+    document.addEventListener("click", (e) => {
+      if (!accountPopover.contains(e.target) && e.target !== avatarBtn) {
+        accountPopover.classList.remove("open");
+      }
+    });
+
     function isAdmin(user) {
-      return Boolean(user && user.email === ADMIN_EMAIL && user.emailVerified);
+      return Boolean(user && user.email === ADMIN_EMAIL);
     }
 
-    const authStatusEl = document.getElementById("auth-status");
-    const adminPanelEl = document.getElementById("admin-panel");
+    function renderAvatar(user, customName) {
+      const nameSource = customName || user.displayName || user.email || "U";
+      const initial = nameSource.trim().charAt(0).toUpperCase();
+      if (user.photoURL) {
+        avatarBtn.innerHTML = `<img src="${user.photoURL}" alt="Avatar" referrerpolicy="no-referrer" />`;
+        document.getElementById("popoverAvatar").innerHTML = `<img src="${user.photoURL}" alt="Avatar" referrerpolicy="no-referrer" />`;
+      } else {
+        avatarBtn.textContent = initial;
+        document.getElementById("popoverAvatar").textContent = initial;
+      }
+      document.getElementById("popoverDisplayName").textContent = customName || user.displayName || "Uživatel";
+      document.getElementById("popoverEmail").textContent = user.email || "";
+    }
 
-    onAuthStateChanged(auth, (user) => {
+    async function loadUserProfile(user) {
+      try {
+        const snap = await getDoc(doc(db, "users", user.uid));
+        const d = snap.exists() ? snap.data() : {};
+        document.getElementById("prof-name").value = d.displayName || user.displayName || "";
+        document.getElementById("prof-discord").value = d.discord || "";
+        document.getElementById("prof-roblox").value = d.roblox || "";
+        document.getElementById("prof-bio").value = d.bio || "";
+        renderAvatar(user, d.displayName || user.displayName);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    onAuthStateChanged(auth, async (user) => {
       const admin = isAdmin(user);
-      adminPanelEl.classList.toggle("visible", admin);
+      // Složku/sekci Upravit vidí jen petrsplays@gmail.com
+      adminSection.classList.toggle("visible", admin);
       if (!admin) resetForm();
 
-      if (!user) {
-        authStatusEl.textContent = "Nepřihlášen";
+      if (user) {
+        loginModal.classList.remove("open");
+        openLoginModalBtn.style.display = "none";
+        avatarBtn.style.display = "flex";
+        await loadUserProfile(user);
       } else {
-        authStatusEl.textContent = `Přihlášen: ${user.email || user.phoneNumber || user.uid}${admin ? " (Správce projektů aktivní)" : " (Pouze čtení)"}`;
+        openLoginModalBtn.style.display = "inline-block";
+        avatarBtn.style.display = "none";
+        accountPopover.classList.remove("open");
       }
-      renderProjects();
+      renderItems();
     });
 
-    // Přihlášení E-mail
-    document.getElementById("btn-login-email").addEventListener("click", async () => {
-      const email = document.getElementById("login-email").value.trim();
-      const password = document.getElementById("login-password").value;
-      if (!email || !password) return alert("Vyplň e-mail a heslo.");
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-      } catch (err) {
-        alert("Chyba přihlášení: " + err.message);
-      }
+    document.getElementById("btnLoginGoogle").addEventListener("click", async () => {
+      try { await signInWithPopup(auth, new GoogleAuthProvider()); } catch (e) { alert(e.message); }
     });
 
-    // Přihlášení Google
-    document.getElementById("btn-login-google").addEventListener("click", async () => {
-      try {
-        await signInWithPopup(auth, new GoogleAuthProvider());
-      } catch (err) {
-        alert("Chyba Google přihlášení: " + err.message);
-      }
+    document.getElementById("btnLoginEmail").addEventListener("click", async () => {
+      const email = document.getElementById("loginEmail").value.trim();
+      const pass = document.getElementById("loginPassword").value;
+      if (!email || !pass) return alert("Vyplň e-mail a heslo.");
+      try { await signInWithEmailAndPassword(auth, email, pass); } catch (e) { alert(e.message); }
     });
 
-    // Přihlášení Telefon (SMS)
-    function ensureRecaptcha() {
-      if (!window.recaptchaVerifier) {
-        window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", { size: "normal" });
+    document.getElementById("btnSaveProfile").addEventListener("click", async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+      const displayName = document.getElementById("prof-name").value.trim();
+      const discord = document.getElementById("prof-discord").value.trim();
+      const roblox = document.getElementById("prof-roblox").value.trim();
+      const bio = document.getElementById("prof-bio").value.trim();
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid, email: user.email || "", displayName, discord, roblox, bio, updatedAt: serverTimestamp()
+      }, { merge: true });
+      if (displayName && displayName !== user.displayName) await updateProfile(user, { displayName });
+      renderAvatar(user, displayName);
+      const msg = document.getElementById("profileSaveMsg");
+      msg.style.display = "block";
+      setTimeout(() => (msg.style.display = "none"), 2000);
+    });
+
+    document.getElementById("btnLogout").addEventListener("click", () => signOut(auth));
+
+    // Detail modal s křížkem pro zavření
+    const detailModal = document.getElementById("detailModal");
+    function openDetailModal(item) {
+      document.getElementById("detailTitle").textContent = item.title || "";
+      document.getElementById("detailBody").textContent = item.content || "";
+      const linkEl = document.getElementById("detailLink");
+      if (item.url && /^https?:\/\//i.test(item.url)) {
+        linkEl.href = item.url;
+        linkEl.style.display = "inline-block";
+      } else {
+        linkEl.style.display = "none";
       }
+      detailModal.classList.add("open");
     }
+    document.getElementById("closeDetailModal").addEventListener("click", () => detailModal.classList.remove("open"));
+    detailModal.addEventListener("click", (e) => { if (e.target === detailModal) detailModal.classList.remove("open"); });
 
-    document.getElementById("btn-send-sms").addEventListener("click", async () => {
-      const phone = document.getElementById("login-phone").value.trim();
-      if (!phone) return alert("Zadej telefonní číslo ve formátu +420...");
-      try {
-        ensureRecaptcha();
-        confirmationResult = await signInWithPhoneNumber(auth, phone, window.recaptchaVerifier);
-        alert("SMS kód odeslán.");
-      } catch (err) {
-        alert("Chyba odeslání SMS: " + err.message);
-      }
-    });
-
-    document.getElementById("btn-verify-sms").addEventListener("click", async () => {
-      const code = document.getElementById("sms-code").value.trim();
-      if (!confirmationResult || !code) return alert("Nejdřív pošli SMS a zadej kód.");
-      try {
-        await confirmationResult.confirm(code);
-        alert("Telefon ověřen.");
-      } catch (err) {
-        alert("Neplatný kód: " + err.message);
-      }
-    });
-
-    document.getElementById("btn-logout").addEventListener("click", async () => {
-      await signOut(auth);
-    });
-
-    // Formulář projektů
-    const editIdInput = document.getElementById("edit-doc-id");
-    const titleInput = document.getElementById("proj-title");
-    const catInput = document.getElementById("proj-category");
-    const urlInput = document.getElementById("proj-url");
-    const descInput = document.getElementById("proj-desc");
-    const cancelBtn = document.getElementById("btn-cancel-edit");
+    // CRUD položek (jen petrsplays@gmail.com)
+    const editDocId = document.getElementById("editDocId");
+    const itemTitle = document.getElementById("itemTitle");
+    const itemUrl = document.getElementById("itemUrl");
+    const itemContent = document.getElementById("itemContent");
+    const btnCancelEdit = document.getElementById("btnCancelEdit");
 
     function resetForm() {
-      editIdInput.value = "";
-      titleInput.value = "";
-      catInput.value = "";
-      urlInput.value = "";
-      descInput.value = "";
-      cancelBtn.style.display = "none";
+      editDocId.value = "";
+      itemTitle.value = "";
+      itemUrl.value = "";
+      itemContent.value = "";
+      btnCancelEdit.style.display = "none";
     }
+    btnCancelEdit.addEventListener("click", resetForm);
 
-    cancelBtn.addEventListener("click", resetForm);
-
-    document.getElementById("btn-save-project").addEventListener("click", async () => {
-      if (!isAdmin(auth.currentUser)) {
-        return alert("Pouze petrsplays@gmail.com (s ověřeným e-mailem) může přidávat nebo upravovat projekty.");
-      }
-
-      const title = titleInput.value.trim();
-      const category = catInput.value.trim() || "Projekt";
-      const url = urlInput.value.trim();
-      const description = descInput.value.trim();
-
-      if (!title || !description) {
-        return alert("Vyplň název a popis projektu.");
-      }
+    document.getElementById("btnSaveItem").addEventListener("click", async () => {
+      if (!isAdmin(auth.currentUser)) return alert("Pouze petrsplays@gmail.com může upravovat.");
+      const title = itemTitle.value.trim();
+      const url = itemUrl.value.trim();
+      const content = itemContent.value.trim();
+      if (!title || !content) return alert("Vyplň název a obsah.");
 
       try {
-        const editId = editIdInput.value;
-        if (editId) {
-          await updateDoc(doc(db, "projects", editId), {
-            title,
-            category,
-            url,
-            description,
-            updatedAt: serverTimestamp()
-          });
+        if (editDocId.value) {
+          await updateDoc(doc(db, Projekty, editDocId.value), { title, url, content, updatedAt: serverTimestamp() });
         } else {
-          await addDoc(collection(db, "projects"), {
-            title,
-            category,
-            url,
-            description,
-            author: ADMIN_EMAIL,
-            createdAt: serverTimestamp()
-          });
+          await addDoc(collection(db, Projekty), { title, url, content, createdAt: serverTimestamp() });
         }
         resetForm();
-      } catch (err) {
-        alert("Chyba při ukládání projektu: " + err.message);
+      } catch (e) {
+        alert("Chyba ukládání: " + e.message);
       }
     });
 
-    // Živé načítání libovolného počtu projektů
-    const qProjects = query(collection(db, "projects"), orderBy("createdAt", "desc"));
-    onSnapshot(qProjects, (snapshot) => {
-      currentProjectsMap.clear();
-      snapshot.forEach((docSnap) => {
-        currentProjectsMap.set(docSnap.id, docSnap.data());
-      });
-      document.getElementById("project-count").textContent = `${currentProjectsMap.size}`;
-      renderProjects();
+    const itemsMap = new Map();
+    const itemsGrid = document.getElementById("itemsGrid");
+
+    onSnapshot(query(collection(db, Projekty), orderBy("createdAt", "desc")), (snap) => {
+      itemsMap.clear();
+      snap.forEach((d) => itemsMap.set(d.id, d.data()));
+      renderItems();
     });
 
-    const container = document.getElementById("projects-container");
-
-    function renderProjects() {
+    function renderItems() {
       const admin = isAdmin(auth.currentUser);
-      container.innerHTML = "";
-
-      if (currentProjectsMap.size === 0) {
-        container.innerHTML = `<div class="card"><p>Zatím nejsou přidány žádné projekty.</p></div>`;
+      itemsGrid.innerHTML = "";
+      if (itemsMap.size === 0) {
+        itemsGrid.innerHTML = `<div class="card"><p>Zatím zde nejsou žádné položky.</p></div>`;
         return;
       }
 
-      currentProjectsMap.forEach((data, id) => {
+      itemsMap.forEach((data, id) => {
         const card = document.createElement("article");
-        card.className = "project-card";
-
-        const safeUrl = data.url && /^https?:\/\//i.test(data.url)
-          ? `<a class="project-link" href="${escapeAttr(data.url)}" target="_blank" rel="noopener noreferrer">Otevřít projekt &rarr;</a>`
-          : "";
-
-        const adminActions = admin
-          ? `<div class="btn-row">
-               <button class="secondary" data-edit="${escapeAttr(id)}">Upravit</button>
-               <button class="danger" data-delete="${escapeAttr(id)}">Smazat</button>
-             </div>`
-          : "";
-
+        card.className = "item-card";
         card.innerHTML = `
           <div>
-            <div class="project-meta">
-              <span class="tag">${escapeHtml(data.category || "Projekt")}</span>
-            </div>
-            <h3 class="project-title" style="margin-top: 8px;">${escapeHtml(data.title || "")}</h3>
-            <p class="project-desc" style="margin-top: 6px;">${escapeHtml(data.description || "")}</p>
+            <h3 class="item-title">${escapeHtml(data.title || "")}</h3>
+            <p class="item-preview">${escapeHtml(data.content || "")}</p>
           </div>
-          <div>
-            ${safeUrl}
-            ${adminActions}
-          </div>
+          ${admin ? `<div class="btn-row" onclick="event.stopPropagation()">
+            <button class="btn btn-secondary" data-edit="${escapeAttr(id)}">Upravit</button>
+            <button class="btn btn-danger" data-del="${escapeAttr(id)}">Smazat</button>
+          </div>` : ""}
         `;
 
-        container.appendChild(card);
-      });
+        card.addEventListener("click", () => openDetailModal(data));
 
-      container.querySelectorAll("[data-edit]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const id = btn.getAttribute("data-edit");
-          const item = currentProjectsMap.get(id);
-          if (!item) return;
-          editIdInput.value = id;
-          titleInput.value = item.title || "";
-          catInput.value = item.category || "";
-          urlInput.value = item.url || "";
-          descInput.value = item.description || "";
-          cancelBtn.style.display = "inline-block";
-          adminPanelEl.scrollIntoView({ behavior: "smooth" });
+        card.querySelector("[data-edit]")?.addEventListener("click", () => {
+          editDocId.value = id;
+          itemTitle.value = data.title || "";
+          itemUrl.value = data.url || "";
+          itemContent.value = data.content || "";
+          btnCancelEdit.style.display = "inline-block";
+          adminSection.scrollIntoView({ behavior: "smooth" });
         });
-      });
 
-      container.querySelectorAll("[data-delete]").forEach((btn) => {
-        btn.addEventListener("click", async () => {
+        card.querySelector("[data-del]")?.addEventListener("click", async () => {
           if (!isAdmin(auth.currentUser)) return;
-          const id = btn.getAttribute("data-delete");
-          if (!confirm("Opravdu smazat tento projekt?")) return;
-          try {
-            await deleteDoc(doc(db, "projects", id));
-          } catch (err) {
-            alert("Chyba při mazání: " + err.message);
-          }
+          if (!confirm("Opravdu smazat?")) return;
+          await deleteDoc(doc(db, COLLECTION_NAME, id));
         });
+
+        itemsGrid.appendChild(card);
       });
     }
 
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;");
+    function escapeHtml(s) {
+      return String(s).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
     }
-
-    function escapeAttr(str) {
-      return escapeHtml(str).replaceAll("'", "&#39;");
+    function escapeAttr(s) {
+      return escapeHtml(s).replaceAll("'", "&#39;");
     }
 
     // Překladač (CS, SK, EN-GB, EN-US, UA)
     const translations = {
-      "cs": {
-        nav_home: "Home", nav_projects: "Projekty", nav_team: "Team", nav_work: "Spolupráce",
-        nav_blogs: "Blog", nav_sponsors: "Sponzoři", nav_ads: "Vaše reklamy",
-        projects_title: "Projekty",
-        projects_sub: "Přehled všech projektů ukládaných do Firestore.",
-        admin_add_title: "Přidat / upravit projekt (pouze petrsplays@gmail.com)",
-        btn_save_project: "Uložit projekt", btn_cancel: "Zrušit úpravu",
-        loading_projects: "Načítám projekty...", auth_title: "Přihlášení",
-        copyright: "© 2026 PetrsPlays Official. Všechna práva vyhrazena."
-      },
-      "sk": {
-        nav_home: "Domov", nav_projects: "Projekty", nav_team: "Tím", nav_work: "Spolupráca",
-        nav_blogs: "Blog", nav_sponsors: "Sponzori", nav_ads: "Vaše reklamy",
-        projects_title: "Projekty",
-        projects_sub: "Prehľad všetkých projektov ukladaných do Firestore.",
-        admin_add_title: "Pridať / upraviť projekt (iba petrsplays@gmail.com)",
-        btn_save_project: "Uložiť projekt", btn_cancel: "Zrušiť úpravu",
-        loading_projects: "Načítavam projekty...", auth_title: "Prihlásenie",
-        copyright: "© 2026 PetrsPlays Official. Všetky práva vyhradené."
-      },
-      "en-GB": {
-        nav_home: "Home", nav_projects: "Projects", nav_team: "Team", nav_work: "Work With Us",
-        nav_blogs: "Blog", nav_sponsors: "Sponsors", nav_ads: "Your Ads",
-        projects_title: "Projects",
-        projects_sub: "All projects stored live in Firestore.",
-        admin_add_title: "Add / edit project (petrsplays@gmail.com only)",
-        btn_save_project: "Save Project", btn_cancel: "Cancel Edit",
-        loading_projects: "Loading projects...", auth_title: "Sign In",
-        copyright: "© 2026 PetrsPlays Official. All rights reserved."
-      },
-      "en-US": {
-        nav_home: "Home", nav_projects: "Projects", nav_team: "Team", nav_work: "Work With Us",
-        nav_blogs: "Blog", nav_sponsors: "Sponsors", nav_ads: "Your Ads",
-        projects_title: "Projects",
-        projects_sub: "All projects stored live in Firestore.",
-        admin_add_title: "Add / edit project (petrsplays@gmail.com only)",
-        btn_save_project: "Save Project", btn_cancel: "Cancel Edit",
-        loading_projects: "Loading projects...", auth_title: "Sign In",
-        copyright: "© 2026 PetrsPlays Official. All rights reserved."
-      },
-      "uk": {
-        nav_home: "Головна", nav_projects: "Проєкти", nav_team: "Команда", nav_work: "Співпраця",
-        nav_blogs: "Блог", nav_sponsors: "Спонсори", nav_ads: "Ваша реклама",
-        projects_title: "Проєкти",
-        projects_sub: "Усі проєкти, що зберігаються у Firestore.",
-        admin_add_title: "Додати / редагувати проєкт (лише petrsplays@gmail.com)",
-        btn_save_project: "Зберегти проєкт", btn_cancel: "Скасувати редагування",
-        loading_projects: "Завантаження проєктів...", auth_title: "Вхід",
-        copyright: "© 2026 PetrsPlays Official. Усі права захищено."
-      }
+      "cs": { nav_home: "Home", nav_projects: "Projekty", nav_team: "Team", nav_work: "Spolupráce", nav_blogs: "Blog", nav_sponsors: "Sponzoři", nav_ads: "Vaše reklamy", btn_login: "Přihlásit se", page_title: "Sekce", page_sub: "Kliknutím na položku otevřeš její detail a zavřeš ho křížkem.", edit_folder_title: "Upravit / přidat položku", copyright: "© 2026 PetrsPlays Official. Všechna práva vyhrazena." },
+      "sk": { nav_home: "Domov", nav_projects: "Projekty", nav_team: "Tím", nav_work: "Spolupráca", nav_blogs: "Blog", nav_sponsors: "Sponzori", nav_ads: "Vaše reklamy", btn_login: "Prihlásiť sa", page_title: "Sekcia", page_sub: "Kliknutím na položku otvoríš detail a zatvoríš ho krížikom.", edit_folder_title: "Upraviť / pridať položku", copyright: "© 2026 PetrsPlays Official. Všetky práva vyhradené." },
+      "en-GB": { nav_home: "Home", nav_projects: "Projects", nav_team: "Team", nav_work: "Work With Us", nav_blogs: "Blog", nav_sponsors: "Sponsors", nav_ads: "Your Ads", btn_login: "Sign in", page_title: "Section", page_sub: "Click an item to open its details and close with the cross.", edit_folder_title: "Edit / add item", copyright: "© 2026 PetrsPlays Official. All rights reserved." },
+      "en-US": { nav_home: "Home", nav_projects: "Projects", nav_team: "Team", nav_work: "Work With Us", nav_blogs: "Blog", nav_sponsors: "Sponsors", nav_ads: "Your Ads", btn_login: "Sign in", page_title: "Section", page_sub: "Click an item to open details and close with the X button.", edit_folder_title: "Edit / add item", copyright: "© 2026 PetrsPlays Official. All rights reserved." },
+      "uk": { nav_home: "Головна", nav_projects: "Проєкти", nav_team: "Команда", nav_work: "Співпраця", nav_blogs: "Блог", nav_sponsors: "Спонсори", nav_ads: "Ваша реклама", btn_login: "Увійти", page_title: "Розділ", page_sub: "Натисніть на елемент, щоб відкрити деталі, і закрийте хрестиком.", edit_folder_title: "Редагувати / додати елемент", copyright: "© 2026 PetrsPlays Official. Усі права захищено." }
     };
 
     const langSelect = document.getElementById("langSelect");
