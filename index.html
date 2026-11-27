@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PetrsPlays Official — Projekty</title>
+  <title>PetrsPlays Official — Sekce</title>
   <style>
     :root {
       --bg: #0b0d12;
@@ -679,7 +679,7 @@
     };
 
     // Pro každý repozitář změň na: "blogs", "projects", "team", "work_with_us", "sponsors", "ads"
-    const COLLECTION_NAME = "blogs";
+    const COLLECTION_NAME = "projekty";
     const ADMIN_EMAIL = "petrsplays@gmail.com";
 
     const app = initializeApp(firebaseConfig);
@@ -846,9 +846,9 @@
 
       try {
         if (editDocId.value) {
-          await updateDoc(doc(db, Projekty, editDocId.value), { title, url, content, updatedAt: serverTimestamp() });
+          await updateDoc(doc(db, COLLECTION_NAME, editDocId.value), { title, url, content, updatedAt: serverTimestamp() });
         } else {
-          await addDoc(collection(db, Projekty), { title, url, content, createdAt: serverTimestamp() });
+          await addDoc(collection(db, COLLECTION_NAME), { title, url, content, createdAt: serverTimestamp() });
         }
         resetForm();
       } catch (e) {
@@ -859,7 +859,7 @@
     const itemsMap = new Map();
     const itemsGrid = document.getElementById("itemsGrid");
 
-    onSnapshot(query(collection(db, Projekty), orderBy("createdAt", "desc")), (snap) => {
+    onSnapshot(query(collection(db, COLLECTION_NAME), orderBy("createdAt", "desc")), (snap) => {
       itemsMap.clear();
       snap.forEach((d) => itemsMap.set(d.id, d.data()));
       renderItems();
